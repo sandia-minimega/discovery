@@ -1,0 +1,35 @@
+{{ if isEndpoint .Node }}
+{{ if .Node.D.router }}
+{{ info "### minirouter ###" }}
+{{ range $i, $e := .Node.Edges }}
+	{{ if $e.D.ip }}
+		{{ debug "adding minirouter network %v" $e.N }}
+		router {{ $.Node.D.name }} interface {{ $i }} {{ $e.D.ip }}
+	{{ end }}
+	{{ if $e.D.DHCP }}
+		{{ debug "adding minirouter dhcp" }}
+		{{ if $e.D.DHCPLow }}
+			router {{ $.Node.D.name }} dhcp {{ $e.D.DHCP }} range {{ $e.D.DHCPLow }} {{ $e.D.DHCPHigh }}
+		{{ end }}
+		{{ if $e.D.DHCPRouter }}
+			router {{ $.Node.D.name }} dhcp {{ $e.D.DHCP }} router {{ $e.D.DHCPRouter }}
+		{{ end }}
+		{{ if $e.D.DHCPDNS }}
+			router {{ $.Node.D.name }} dhcp {{ $e.D.DHCP }} dns {{ $e.D.DHCPDNS }}
+		{{ end }}
+		{{ range $mac, $ip := jsonMap $e.D.DHCPStatic }}
+			router {{ $.Node.D.name }} dhcp {{ $e.D.DHCP }} static {{ $mac }} {{ $ip }}
+		{{ end }}
+	{{ end }}
+	{{ if $e.D.OSPF }}
+		router {{ $.Node.D.name }} route ospf 0 {{ $i }}
+	{{ end }}
+{{ end }}
+{{ if .Node.D.dns }}
+{{ range $host, $ip := jsonMap .Node.D.dns }}
+	router {{ $.Node.D.name }} dns {{ $ip }} {{ $host }}
+{{ end }}
+{{ end }}
+router {{ .Node.D.name }} commit
+{{ end }}
+{{ end }}

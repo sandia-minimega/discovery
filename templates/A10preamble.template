@@ -1,0 +1,8 @@
+{{ if once }}
+{{ info "### preamble ###" }}
+# enter a namespace if a namespace is defined
+{{ if .Config.namespace }}
+	{{ debug "adding namespace %v" .Config.namespace }}
+	namespace {{ .Config.namespace }}
+{{ end }}
+{{ end }}

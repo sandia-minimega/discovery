@@ -1,0 +1,3 @@
+{{ if once }}
+vm start all
+{{ end }}

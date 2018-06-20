@@ -1,0 +1,17 @@
+{{ if isEndpoint .Node }}
+{{ info "### generic_container_tags ###" }}
+{{ range $k, $v := .Node.D }}
+	{{ $l := len $v }}
+	{{ if lt $l 100 }}
+		vm config tag {{ $k }} {{ printf "%q" $v }}
+	{{ end }}
+{{ end }}
+{{ range $i, $v := .Node.Edges }}
+	{{ range $k, $d := $v.D }}
+		{{ $l := len $d }}
+		{{ if lt $l 100 }}
+			vm config tag edge_{{ $i }}.{{ $k }} {{ printf "%q" $d }}
+		{{ end }}
+	{{ end }}
+{{ end }}
+{{ end }}

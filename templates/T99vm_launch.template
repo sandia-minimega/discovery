@@ -1,0 +1,4 @@
+{{ if once }}
+{{ info "### vm launch ###" }}
+vm launch
+{{ end }}

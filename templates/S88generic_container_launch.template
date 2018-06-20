@@ -1,0 +1,10 @@
+{{ if isEndpoint .Node }}
+{{ info "### generic_container_launch ###" }}
+{{ if .Node.D.name }}
+	vm launch container {{ .Node.D.name }}
+{{ else }}
+	{{ $name := printf "discovery-node-%v" .Node.NID }}
+	vm launch container {{ $name }}
+	{{ setData .Node "name" $name }}
+{{ end }}
+{{ end }}
