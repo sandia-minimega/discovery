@@ -109,6 +109,7 @@ func main() {
 				"hostname":  n.Hostname,
 				"latitude":  n.Latitude,
 				"longitude": n.Longitude,
+				"router":    "true",
 			}
 
 			for _, p := range n.Ports {
@@ -123,6 +124,7 @@ func main() {
 							"ip":          p.IPAddress + "/" + p.Netmask,
 							"description": p.Description,
 							"capacity":    p.Capacity,
+							"OSPF":        "true",
 						},
 					})
 
@@ -160,6 +162,7 @@ func main() {
 							"ip":          l.Name,
 							"description": p.Description,
 							"capacity":    p.Capacity,
+							"OSPF":        "true",
 						},
 					})
 
