@@ -3,12 +3,12 @@
 {{ debug "node %v" .Node }}
 clear vm config
 
-{{ if .Node.D.containerfs }}
-	vm config filesystem {{ .Node.D.containerfs }}
-{{ else if .Config.containerfs }}
-	vm config filesystem {{ .Config.containerfs }}
+{{ if .Node.D.minicccfs }}
+	vm config filesystem {{ .Node.D.minicccfs }}
+{{ else if .Config.minicccfs }}
+	vm config filesystem {{ .Config.minicccfs }}
 {{ else }}
-	{{ error "missing containerfs config!" }}
+	{{ error "missing minicccfs config!" }}
 {{ end }}
 
 vm config uuid {{ .Node.D.uuid }}
