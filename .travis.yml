@@ -1,0 +1,16 @@
+dist: trusty
+sudo: false
+language: go
+go:
+  - 1.8.x
+  - 1.9.x
+  - 1.10.x
+addons:
+  apt:
+    packages:
+    - libpcap-dev
+install: true
+script:
+  - ./build.bash
+  - ./test.bash
+  - ./doc.bash
