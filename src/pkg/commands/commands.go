@@ -91,7 +91,7 @@ func (c Commands) Run() error {
 	}
 
 	// must be trying to run a command
-	if cmd := c.Find(flag.Arg(1)); cmd != nil {
+	if cmd := c.Find(flag.Arg(0)); cmd != nil {
 		if f := cmd.FlagSet(); f != nil {
 			f.Parse(flag.Args()[1:])
 		}
