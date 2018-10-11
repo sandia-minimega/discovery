@@ -17,10 +17,10 @@
 		{{ if $e.D.DHCPDNS }}
 			router {{ $.Node.D.name }} dhcp {{ $e.D.DHCP }} dns {{ $e.D.DHCPDNS }}
 		{{ end }}
-	  {{ if $e.D.DHCPStatic }}
-      {{ range $mac, $ip := jsonMap $e.D.DHCPStatic }}
-        router {{ $.Node.D.name }} dhcp {{ $e.D.DHCP }} static {{ $mac }} {{ $ip }}
-      {{ end }}
+		{{ if $e.D.DHCPStatic }}
+			{{ range $mac, $ip := jsonMap $e.D.DHCPStatic }}
+				router {{ $.Node.D.name }} dhcp {{ $e.D.DHCP }} static {{ $mac }} {{ $ip }}
+			{{ end }}
 		{{ end }}
 	{{ end }}
 	{{ if $e.D.OSPF }}
