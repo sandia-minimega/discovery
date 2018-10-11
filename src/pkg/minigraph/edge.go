@@ -24,7 +24,7 @@ func newEdge() *Edge {
 
 func (e *Edge) Match(k, v string) bool {
 	if k != "" {
-		if k == "n" {
+		if strings.ToUpper(k) == "N" {
 			if fmt.Sprintf("%v", e.N) == v {
 				return true
 			}
