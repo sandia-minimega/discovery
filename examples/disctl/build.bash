@@ -17,17 +17,13 @@ net0=$(bin/disctl -nn)
 # which we'll need later to add config options and add it to the
 # network.
 
-# Create the first endpoint.
-endpoint=$(bin/disctl -ne)
+for i in $(seq 2); do
+  # Create the endpoint.
+  endpoint=$(bin/disctl -ne)
 
-# Add the first endpoint to the network.
-bin/disctl -c $net0 $endpoint
-
-# Create the second endpoint.
-endpoint=$(bin/disctl -ne)
-
-# Add the second endpoint to the network.
-bin/disctl -c $net0 $endpoint
+  # Add the endpoint to the first network.
+  bin/disctl -c $net0 $endpoint
+done
 
 # Create second network (we'll add two endpoints to it later). The value
 # returned by the bin/disctl command is the ID of the network, which we'll
@@ -39,17 +35,13 @@ net1=$(bin/disctl -nn)
 # which we'll need later to add config options and add it to the
 # network.
 
-# Create the first endpoint.
-endpoint=$(bin/disctl -ne)
+for i in $(seq 2); do
+  # Create the endpoint.
+  endpoint=$(bin/disctl -ne)
 
-# Add the first endpoint to the network.
-bin/disctl -c $net1 $endpoint
-
-# Create the second endpoint.
-endpoint=$(bin/disctl -ne)
-
-# Add the second endpoint to the network.
-bin/disctl -c $net1 $endpoint
+  # Add the endpoint to the second network.
+  bin/disctl -c $net1 $endpoint
+done
 
 # Create a router between the two networks that will serve up DHCP
 # addresses to each network.
