@@ -133,6 +133,8 @@ func (h *Host) Write(out io.Writer) {
 	if v := fmtStrings(h.Routers); v != "" {
 		fmt.Fprintf(out, "routers=%v\n", v)
 	}
+
+	fmt.Fprintln(out)
 }
 
 func (h *Host) Out() *HostOut {
