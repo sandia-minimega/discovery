@@ -97,7 +97,7 @@ func (c Commands) Run() error {
 		}
 
 		if err := cmd.Run(); err != nil {
-			return fmt.Errorf("%v failed: %v", err)
+			return fmt.Errorf("%v failed: %v", cmd.Name(), err)
 		}
 
 		return nil

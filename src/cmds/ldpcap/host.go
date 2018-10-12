@@ -134,7 +134,7 @@ func (h *Host) Write(out io.Writer) {
 		fmt.Fprintf(out, "routers=%v\n", v)
 	}
 
-	fmt.Fprintln(out, "\n")
+	fmt.Fprintln(out)
 }
 
 func (h *Host) Out() *HostOut {
