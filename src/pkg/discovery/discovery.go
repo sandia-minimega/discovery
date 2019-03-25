@@ -538,7 +538,7 @@ func (c *Client) Connect(nnid, enid int, eidx int) (*minigraph.Endpoint, error) 
 		url = fmt.Sprintf("%v/connect/%v/%v/%v", c.server, nnid, enid, eidx)
 	}
 
-	resp, err := http.Get(url)
+	resp, err := http.Post(url, "", nil)
 	if err != nil {
 		return nil, err
 	}
@@ -562,7 +562,7 @@ func (c *Client) Connect(nnid, enid int, eidx int) (*minigraph.Endpoint, error) 
 func (c *Client) Disconnect(nnid, enid int) (*minigraph.Endpoint, error) {
 	url := fmt.Sprintf("%v/disconnect/%v/%v", c.server, nnid, enid)
 
-	resp, err := http.Get(url)
+	resp, err := http.Post(url, "", nil)
 	if err != nil {
 		return nil, err
 	}

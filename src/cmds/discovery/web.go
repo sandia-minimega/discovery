@@ -125,7 +125,7 @@ func webConnect(w http.ResponseWriter, r *http.Request) {
 	log.Debug("split path: %v", p)
 
 	switch r.Method {
-	case "GET":
+	case "POST":
 		if len(p) < 2 {
 			err := fmt.Errorf("not enough arguments: %v", r.URL.Path)
 			w.WriteHeader(http.StatusBadRequest)
@@ -211,7 +211,7 @@ func webDisconnect(w http.ResponseWriter, r *http.Request) {
 	log.Debug("split path: %v", p)
 
 	switch r.Method {
-	case "GET":
+	case "POST":
 		if len(p) < 2 {
 			err := fmt.Errorf("not enough arguments: %v", r.URL.Path)
 			w.WriteHeader(http.StatusBadRequest)
