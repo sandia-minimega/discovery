@@ -1,0 +1,81 @@
+div#footer {
+	text-align: left;
+	color: #000;
+	font-size: 14px;
+	margin: 40px 0;
+}
+
+div#btnfit {
+	width: 50px;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+
+div#search {
+}
+
+div#info {
+	position: absolute;
+	top: 10;
+	left: 10;
+	height: auto;
+	width: auto;
+	padding: 10px;
+	background-color: white;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+	-moz-box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+	box-shadow: 4px 4px 10px rgba(0,0,0,0.4);
+	pointer-events: none;
+	border: 1px solid black;
+}
+
+div#info.hidden {
+	display: none;
+}
+
+div#info p {
+	margin: 0;
+	font-family: sans-serif;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+line {
+	stroke: grey;
+	stroke-width: 2px;
+}
+
+text {
+	text-anchor: middle;
+	font-size: 5px;
+	margin: 0;
+	font-family: sans-serif;
+	line-height: 20px;
+	fill: white;
+}
+
+.input[type=text] {
+    width: 175%;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.loader {
+    position:absolute;
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    left:50%;
+    top:50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
