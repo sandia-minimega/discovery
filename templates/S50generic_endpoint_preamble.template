@@ -1,0 +1,35 @@
+{{ if isEndpoint .Node }}
+{{ info "### generic_endpoint_preamble ###" }}
+{{ debug "node %v" .Node }}
+clear vm config
+
+vm config uuid {{ .Node.D.uuid }}
+
+{{ if .Node.D.vcpus }}
+    vm config vcpus {{ .Node.D.vcpus }}
+{{ end }}
+
+{{ if .Node.D.memory }}
+    vm config memory {{ .Node.D.memory }}
+{{ end }}
+
+{{ if .Node.D.snapshot }}
+    vm config snapshot {{ .Node.D.snapshot }}
+{{ end }}
+
+{{ if .Node.D.schedule }}
+    vm config schedule {{ .Node.D.schedule }}
+{{ end }}
+
+{{ if .Node.D.colocate }}
+    vm config colocate {{ .Node.D.colocate }}
+{{ end }}
+
+{{ if .Node.D.coschedule }}
+    vm config coschedule {{ .Node.D.coschedule }}
+{{ end }}
+
+{{ if .Node.D.backchannel }}
+    vm config backchannel {{ .Node.D.backchannel }}
+{{ end }}
+{{ end }}

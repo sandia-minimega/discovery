@@ -1,0 +1,78 @@
+{{ if and (isEndpoint .Node) (eq (or .Node.D.type "") "qemu") }}
+{{ info "### generic_qemu_preamble ###" }}
+
+{{ if .Node.D.qemu }}
+    vm config qemu {{ .Node.D.qemu }}
+{{ end }}
+
+{{ if .Node.D.cdrom }}
+    vm config cdrom {{ .Node.D.cdrom }}
+{{ end }}
+
+{{ if .Node.D.migrate_path }}
+    vm config migrate {{ .Node.D.migrate_path }}
+{{ end }}
+
+{{ if .Node.D.machine }}
+    vm config machine {{ .Node.D.machine }}
+{{ end }}
+
+{{ if .Node.D.cpu_model }}
+    vm config cpu {{ .Node.D.cpu_model }}
+{{ end }}
+
+{{ if .Node.D.smp_sockets }}
+    vm config sockets {{ .Node.D.smp_sockets }}
+{{ end }}
+
+{{ if .Node.D.smp_cores }}
+    vm config cores {{ .Node.D.smp_cores }}
+{{ end }}
+
+{{ if .Node.D.smp_threads }}
+    vm config threads {{ .Node.D.smp_threads }}
+{{ end }}
+
+{{ if .Node.D.serial_ports }}
+    vm config serial-ports {{ .Node.D.serial_ports }}
+{{ end }}
+
+{{ if .Node.D.virtio_ports }}
+    vm config virtio-ports {{ .Node.D.virtio_ports }}
+{{ end }}
+
+{{ if .Node.D.vga_model }}
+    vm config vga {{ .Node.D.vga_model }}
+{{ end }}
+
+{{ if .Node.D.append }}
+    vm config append {{ .Node.D.append }}
+{{ end }}
+
+{{ if .Node.D.qemu_append }}
+    vm config qemu-append {{ .Node.D.qemu_append }}
+{{ end }}
+
+{{ if .Node.D.disks }}
+	{{ $disks := "" }}
+	{{ range $disk := csvSlice .Node.D.disks }}
+        {{ $disks = printf "%v %v" $disks $disk }}
+    {{ end }}
+    vm config disk {{ $disks }}
+{{ else if and .Node.D.kernel .Node.D.initrd }}
+    vm config kernel {{ .Node.D.kernel }}
+    vm config initrd {{ .Node.D.initrd }}
+{{ else if .Config.default_disks }}
+	{{ $disks := "" }}
+	{{ range $disk := csvSlice .Config.default_disks }}
+        {{ $disks = printf "%v %v" $disks $disk }}
+    {{ end }}
+    vm config disk {{ $disks }}
+{{ else if and .Config.default_kernel .Config.default_initrd }}
+    vm config kernel {{ .Config.default_kernel }}
+    vm config initrd {{ .Config.default_initrd }}
+{{ else }}
+	{{ error "missing disk or kernel/initrd config!" }}
+{{ end }}
+
+{{ end }}
