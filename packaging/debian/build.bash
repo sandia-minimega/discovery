@@ -15,7 +15,7 @@ mkdir -p $DST
 cp -r $ROOT/bin $DST/
 cp -r $ROOT/templates $DST/
 mkdir -p $DST/misc
-cp -r $ROOT/misc/web $DST/
+cp -r $ROOT/misc/web $DST/misc/
 
 echo COPIED FILES
 
