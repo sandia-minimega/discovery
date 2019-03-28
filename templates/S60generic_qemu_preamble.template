@@ -54,20 +54,12 @@
 {{ end }}
 
 {{ if .Node.D.disks }}
-	{{ $disks := "" }}
-	{{ range $disk := csvSlice .Node.D.disks }}
-        {{ $disks = printf "%v %v" $disks $disk }}
-    {{ end }}
-    vm config disk {{ $disks }}
+    vm config disk {{ .Node.D.disks }}
 {{ else if and .Node.D.kernel .Node.D.initrd }}
     vm config kernel {{ .Node.D.kernel }}
     vm config initrd {{ .Node.D.initrd }}
 {{ else if .Config.default_disks }}
-	{{ $disks := "" }}
-	{{ range $disk := csvSlice .Config.default_disks }}
-        {{ $disks = printf "%v %v" $disks $disk }}
-    {{ end }}
-    vm config disk {{ $disks }}
+    vm config disk {{ .Config.default_disks }}
 {{ else if and .Config.default_kernel .Config.default_initrd }}
     vm config kernel {{ .Config.default_kernel }}
     vm config initrd {{ .Config.default_initrd }}
