@@ -20,7 +20,7 @@ var (
 	f_panic = flag.Bool("panic", false, "panic on quit, producing stack traces for debugging")
 	f_file  = flag.String("f", "", "filename of graph to use/create")
 	f_serve = flag.String("serve", fmt.Sprintf(":%v", discovery.Port), "web service address")
-	f_web   = flag.String("web", "web/", "path to static web content")
+	f_web   = flag.String("web", "misc/web/", "path to static web content")
 )
 
 func main() {
