@@ -1,0 +1,8 @@
+Package: discovery
+Version: 0.1-1+master
+Section: utils
+Priority: extra
+Architecture: amd64
+Maintainer: Jonathan Crussell <jcrusse@sandia.gov>, David Fritz <djfritz@sandia.gov>
+Description: A toolset to create network models.
+ The discovery toolset is used to create models of real networks for minimega.
