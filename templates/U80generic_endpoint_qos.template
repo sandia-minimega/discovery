@@ -1,0 +1,18 @@
+{{ if isEndpoint .Node }}
+{{ info "### generic_endpoint_qos ###" }}
+
+{{ $name := .Node.D.name }}
+
+{{ range $i, $e := .Node.Edges }}
+	{{ if $e.D.loss }}
+		qos add {{ $name }} {{ $i }} loss {{ $e.D.loss }}
+	{{ end }}
+	{{ if $e.D.delay }}
+		qos add {{ $name }} {{ $i }} delay {{ $e.D.delay }}
+	{{ end }}
+	{{ if $e.D.rate }}
+		qos add {{ $name }} {{ $i }} rate {{ $e.D.rate }} {{ (or $e.D.rate_unit "mbit") }}
+	{{ end }}
+{{ end }}
+
+{{ end }}
