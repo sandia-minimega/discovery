@@ -1,0 +1,10 @@
+{{ if isEndpoint .Node }}
+{{ info "### generic_route ###" }}
+
+{{ if .Node.D.default_route }}
+    cc filter uuid={{ $.Node.D.uuid }}
+    cc exec ip route add default via {{ .Node.D.default_route }}
+    clear cc filter
+{{ end }}
+
+{{ end }}
