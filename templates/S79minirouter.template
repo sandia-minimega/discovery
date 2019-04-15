@@ -1,0 +1,16 @@
+{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") }}
+{{ if .Node.D.router }}
+{{ info "### minirouter ###" }}
+
+{{ if .Node.D.filesystem }}
+	vm config filesystem {{ .Node.D.filesystem }}
+	vm config preinit {{ .Node.D.filesystem }}/preinit
+{{ else if .Config.default_minirouterfs }}
+	vm config filesystem {{ .Config.default_minirouterfs }}
+	vm config preinit {{ .Config.default_minirouterfs }}/preinit
+{{ else }}
+	{{ error "missing minirouter filesystem config!" }}
+{{ end }}
+
+{{ end }}
+{{ end }}
