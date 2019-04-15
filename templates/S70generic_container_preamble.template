@@ -1,12 +1,12 @@
 {{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") }}
 {{ info "### generic_container_preamble ###" }}
 
-{{ if .Node.D.minicccfs }}
-	vm config filesystem {{ .Node.D.minicccfs }}
-{{ else if .Config.default_minicccfs }}
-	vm config filesystem {{ .Config.default_minicccfs }}
+{{ if .Node.D.filesystem }}
+	vm config filesystem {{ .Node.D.filesystem }}
+{{ else if .Config.default_filesystem }}
+	vm config filesystem {{ .Config.default_filesystem }}
 {{ else }}
-	{{ error "missing minicccfs config!" }}
+	{{ error "missing filesystem config!" }}
 {{ end }}
 
 {{ if .Node.D.hostname }}
