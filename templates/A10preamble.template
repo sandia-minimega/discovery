@@ -5,7 +5,7 @@
 	{{ debug "setting namespace %v" .Config.namespace }}
 	namespace {{ .Config.namespace }}
 {{ end }}
-{{ if (eq .Config.queueing "true") }}
+{{ if (eq (or .Config.queueing "") "true") }}
     ns queueing true
 {{ end }}
 {{ end }}

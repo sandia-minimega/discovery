@@ -1,6 +1,7 @@
 {{ if isEndpoint .Node }}
 {{ info "### vm_launch ###" }}
-{{ $name := .Node.D.name }}
+
+{{ $name := (or .Node.D.name "") }}
 
 {{ if eq $name "" }}
 	{{ $name = printf "discovery-node-%v" .Node.NID }}
