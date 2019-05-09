@@ -46,15 +46,14 @@ func csvSlice(s string) []string {
 	return strings.Split(s, ",")
 }
 
-func jsonMap(s string) map[string]string {
-	log.Debug("jsonMap: %v", s)
-	m := make(map[string]string)
-	err := json.Unmarshal([]byte(s), &m)
-	if err != nil {
+func jsonUnmarshal(s string) interface{} {
+	log.Debug("json: %v", s)
+	var v interface{}
+	if err := json.Unmarshal([]byte(s), &v); err != nil {
 		log.Fatalln(err)
 	}
-	log.Debug("created map: %v", m)
-	return m
+	log.Debug("decoded json: %v", v)
+	return v
 }
 
 func isEndpoint(n minigraph.Node) bool {
@@ -143,21 +142,21 @@ func init() {
 	data = make(map[string]string)
 	onceMap = make(map[string]bool)
 	funcMap = template.FuncMap{
-		"debug":      tDebug,
-		"info":       tInfo,
-		"error":      tError,
-		"warn":       tWarn,
-		"fatal":      tFatal,
-		"once":       once,
-		"isEndpoint": isEndpoint,
-		"isNetwork":  isNetwork,
-		"set":        set,
-		"get":        get,
-		"setData":    setData,
-		"jsonMap":    jsonMap,
-		"csvSlice":   csvSlice,
-		"contains":   contains,
-		"stop":       stop,
+		"debug":         tDebug,
+		"info":          tInfo,
+		"error":         tError,
+		"warn":          tWarn,
+		"fatal":         tFatal,
+		"once":          once,
+		"isEndpoint":    isEndpoint,
+		"isNetwork":     isNetwork,
+		"set":           set,
+		"get":           get,
+		"setData":       setData,
+		"jsonUnmarshal": jsonUnmarshal,
+		"csvSlice":      csvSlice,
+		"contains":      contains,
+		"stop":          stop,
 	}
 }
 
