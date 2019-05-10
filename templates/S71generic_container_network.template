@@ -1,5 +1,7 @@
 {{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") }}
 {{ info "### generic_container_network ###" }}
+
+{{ if not .Node.D.router }}
 {{ range $i, $e := .Node.Edges }}
 	{{ if $e.D.ip }}
 		cc filter uuid={{ $.Node.D.uuid }}
@@ -8,4 +10,6 @@
 		clear cc filter
 	{{ end }}
 {{ end }}
+{{ end }}
+
 {{ end }}
