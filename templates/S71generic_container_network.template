@@ -1,0 +1,15 @@
+{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") }}
+{{ info "### generic_container_network ###" }}
+
+{{ if not .Node.D.router }}
+{{ range $i, $e := .Node.Edges }}
+	{{ if $e.D.ip }}
+		cc filter uuid={{ $.Node.D.uuid }}
+		cc exec ip link set veth{{ $i }} up
+		cc exec ip addr add {{ $e.D.ip }} dev veth{{ $i }}
+		clear cc filter
+	{{ end }}
+{{ end }}
+{{ end }}
+
+{{ end }}

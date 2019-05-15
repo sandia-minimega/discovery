@@ -1,0 +1,29 @@
+{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") }}
+{{ info "### generic_container_preamble ###" }}
+
+{{ if .Node.D.filesystem }}
+	vm config filesystem {{ .Node.D.filesystem }}
+{{ else if .Config.default_filesystem }}
+	vm config filesystem {{ .Config.default_filesystem }}
+{{ else }}
+	{{ error "missing filesystem config!" }}
+{{ end }}
+
+{{ if .Node.D.hostname }}
+	{{/* use the longest hostname */}}
+	{{ $hostname := "" }}
+	{{ range $i, $v := csvSlice .Node.D.hostname }}
+		{{ if eq $hostname "" }}
+			{{ $hostname = $v }}
+		{{ end }}
+		{{ $curr := len $hostname }}
+		{{ $new := len $v }}
+		{{ if lt $new $curr }}
+			{{ $hostname = $v }}
+		{{ end }}
+	{{ end }}
+	{{ if ne $hostname "" }}
+		vm config hostname {{ $hostname }}
+	{{ end }}
+{{ end }}
+{{ end }}

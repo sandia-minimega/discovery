@@ -1,0 +1,19 @@
+{{ if and (isEndpoint .Node) (eq (or .Node.D.type "") "qemu") }}
+{{ if .Node.D.router }}
+{{ info "### minirouter ###" }}
+
+{{ if .Node.D.disks }}
+	{{/* do nothing, already set */}}
+{{ else if and .Node.D.kernel .Node.D.initrd }}
+	{{/* do nothing, already set */}}
+{{ else if .Config.default_minirouter_disks }}
+	vm config disk {{ .Config.default_minirouter_disks }}
+{{ else if and .Config.default_minirouter_kernel .Config.default_minirouter_initrd }}
+	vm config kernel {{ .Config.default_minirouter_kernel }}
+	vm config initrd {{ .Config.default_minirouter_initrd }}
+{{ else }}
+	{{ error "missing minirouter disk or kernel/initrd config!" }}
+{{ end }}
+
+{{ end }}
+{{ end }}

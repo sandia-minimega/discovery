@@ -1,0 +1,30 @@
+{{ if isEndpoint .Node }}
+{{ info "### generic_cc ###" }}
+
+{{ if .Node.D.cc_commands }}
+cc filter uuid={{ $.Node.D.uuid }}
+{{ range $cc := jsonUnmarshal .Node.D.cc_commands }}
+	{{ if $cc.send }}
+		{{ range $v := $cc.send }}
+			cc send {{ $v }}
+		{{ end }}
+	{{ else if $cc.recv }}
+		{{ range $v := $cc.recv }}
+			cc recv {{ $v }}
+		{{ end }}
+	{{ else if $cc.exec }}
+		{{ range $v := $cc.exec }}
+			cc exec {{ $v }}
+		{{ end }}
+	{{ else if $cc.background }}
+		{{ range $v := $cc.background }}
+			cc background {{ $v }}
+		{{ end }}
+	{{ else }}
+		{{ error "invalid cc command: %v" $cc }}
+	{{ end }}
+{{ end }}
+clear cc filter
+{{ end }}
+
+{{ end }}

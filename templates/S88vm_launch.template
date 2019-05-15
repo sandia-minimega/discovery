@@ -1,0 +1,17 @@
+{{ if isEndpoint .Node }}
+{{ info "### vm_launch ###" }}
+
+{{ $name := (or .Node.D.name "") }}
+
+{{ if eq $name "" }}
+	{{ $name = printf "discovery-node-%v" .Node.NID }}
+	{{ setData .Node "name" $name }}
+{{ end }}
+
+{{ if eq (or .Node.D.type "") "qemu" }}
+	vm launch kvm {{ $name }}
+{{ else }}
+	vm launch container {{ $name }}
+{{ end }}
+
+{{ end }}

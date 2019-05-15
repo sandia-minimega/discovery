@@ -1,0 +1,24 @@
+{{ if isEndpoint .Node }}
+{{ info "### generic_endpoint_network ###" }}
+
+{{ $net := "" }}
+{{ range $i, $e := .Node.Edges }}
+	{{ debug "adding network %v" $e.N }}
+	{{ $netspec := printf "network-%v" $e.N }}
+	{{ if $e.D.bridge }}
+		{{ $netspec = printf "%v,%v" $e.D.bridge $netspec }}
+	{{ end }}
+	{{ if $e.D.mac }}
+		{{ $netspec = printf "%v,%v" $netspec $e.D.mac }}
+	{{ end }}
+	{{ if $e.D.driver }}
+		{{ $netspec = printf "%v,%v" $netspec $e.D.driver }}
+	{{ end }}
+
+	{{ $net = printf "%v %v" $net $netspec }}
+{{ end }}
+
+{{ if $net }}
+	vm config net {{ $net }}
+{{ end }}
+{{ end }}

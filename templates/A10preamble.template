@@ -2,7 +2,10 @@
 {{ info "### preamble ###" }}
 # enter a namespace if a namespace is defined
 {{ if .Config.namespace }}
-	{{ debug "adding namespace %v" .Config.namespace }}
+	{{ debug "setting namespace %v" .Config.namespace }}
 	namespace {{ .Config.namespace }}
+{{ end }}
+{{ if (eq (or .Config.queueing "") "true") }}
+    ns queueing true
 {{ end }}
 {{ end }}

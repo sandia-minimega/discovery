@@ -1,5 +1,5 @@
 {{ if isEndpoint .Node }}
-{{ info "### generic_container_tags ###" }}
+{{ info "### generic_endpoint_tags ###" }}
 {{ range $k, $v := .Node.D }}
 	{{ $l := len $v }}
 	{{ if lt $l 100 }}
