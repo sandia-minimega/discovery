@@ -2,8 +2,8 @@
 
 # Set some global default configurations. These just tell discovery what
 # container filesystems to use for the endpoint nodes and the router.
-bin/disctl -update-config minicccfs /opt/minimega/images/miniccc
-bin/disctl -update-config minirouterfs /opt/minimega/images/minirouter
+bin/disctl -update-config default_filesystem /opt/minimega/images/miniccc
+bin/disctl -update-config default_minirouterfs /opt/minimega/images/minirouter
 
 ##### BUILD GRAPH #####
 
