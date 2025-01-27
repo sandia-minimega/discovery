@@ -1,7 +1,6 @@
 # GeoIP2 Reader for Go #
 
-[![Build Status](https://travis-ci.org/oschwald/geoip2-golang.png?branch=master)](https://travis-ci.org/oschwald/geoip2-golang)
-[![GoDoc](https://godoc.org/github.com/oschwald/geoip2-golang?status.png)](https://godoc.org/github.com/oschwald/geoip2-golang)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/oschwald/geoip2-golang)](https://pkg.go.dev/github.com/oschwald/geoip2-golang)
 
 This library reads MaxMind [GeoLite2](http://dev.maxmind.com/geoip/geoip2/geolite2/)
 and [GeoIP2](http://www.maxmind.com/en/geolocation_landing) databases.
@@ -11,7 +10,7 @@ This library is built using
 All data for the database record is decoded using this library. If you only
 need several fields, you may get superior performance by using maxminddb's
 `Lookup` directly with a result struct that only contains the required fields.
-(See [example_test.go](https://github.com/oschwald/maxminddb-golang/blob/master/example_test.go)
+(See [example_test.go](https://github.com/oschwald/maxminddb-golang/blob/main/example_test.go)
 in the maxminddb repository for an example of this.)
 
 ## Installation ##
@@ -31,38 +30,42 @@ documentation and examples.
 package main
 
 import (
-    "fmt"
-    "github.com/oschwald/geoip2-golang"
-    "log"
-    "net"
+	"fmt"
+	"log"
+	"net"
+
+	"github.com/oschwald/geoip2-golang"
 )
 
 func main() {
-    db, err := geoip2.Open("GeoIP2-City.mmdb")
-    if err != nil {
-            log.Fatal(err)
-    }
-    defer db.Close()
-    // If you are using strings that may be invalid, check that ip is not nil
-    ip := net.ParseIP("81.2.69.142")
-    record, err := db.City(ip)
-    if err != nil {
-            log.Fatal(err)
-    }
-    fmt.Printf("Portuguese (BR) city name: %v\n", record.City.Names["pt-BR"])
-    fmt.Printf("English subdivision name: %v\n", record.Subdivisions[0].Names["en"])
-    fmt.Printf("Russian country name: %v\n", record.Country.Names["ru"])
-    fmt.Printf("ISO country code: %v\n", record.Country.IsoCode)
-    fmt.Printf("Time zone: %v\n", record.Location.TimeZone)
-    fmt.Printf("Coordinates: %v, %v\n", record.Location.Latitude, record.Location.Longitude)
-    // Output:
-    // Portuguese (BR) city name: Londres
-    // English subdivision name: England
-    // Russian country name: Великобритания
-    // ISO country code: GB
-    // Time zone: Europe/London
-    // Coordinates: 51.5142, -0.0931
+	db, err := geoip2.Open("GeoIP2-City.mmdb")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+	// If you are using strings that may be invalid, check that ip is not nil
+	ip := net.ParseIP("81.2.69.142")
+	record, err := db.City(ip)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Portuguese (BR) city name: %v\n", record.City.Names["pt-BR"])
+	if len(record.Subdivisions) > 0 {
+		fmt.Printf("English subdivision name: %v\n", record.Subdivisions[0].Names["en"])
+	}
+	fmt.Printf("Russian country name: %v\n", record.Country.Names["ru"])
+	fmt.Printf("ISO country code: %v\n", record.Country.IsoCode)
+	fmt.Printf("Time zone: %v\n", record.Location.TimeZone)
+	fmt.Printf("Coordinates: %v, %v\n", record.Location.Latitude, record.Location.Longitude)
+	// Output:
+	// Portuguese (BR) city name: Londres
+	// English subdivision name: England
+	// Russian country name: Великобритания
+	// ISO country code: GB
+	// Time zone: Europe/London
+	// Coordinates: 51.5142, -0.0931
 }
+
 ```
 
 ## Testing ##
