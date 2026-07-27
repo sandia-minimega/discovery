@@ -10,6 +10,8 @@
 
 {{ if eq (or .Node.D.type "") "qemu" }}
 	vm launch kvm {{ $name }}
+{{ else if eq (or .Node.D.type "") "android" }}
+	vm launch android {{ $name }}
 {{ else }}
 	vm launch container {{ $name }}
 {{ end }}

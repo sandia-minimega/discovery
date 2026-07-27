@@ -1,4 +1,4 @@
-{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") }}
+{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") (ne (or .Node.D.type "") "android") }}
 {{ info "### generic_container_network ###" }}
 
 {{ if not .Node.D.router }}

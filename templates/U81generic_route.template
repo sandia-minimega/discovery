@@ -1,4 +1,4 @@
-{{ if isEndpoint .Node }}
+{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "android") }}
 {{ info "### generic_route ###" }}
 
 {{ if .Node.D.default_route }}

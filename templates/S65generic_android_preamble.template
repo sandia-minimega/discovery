@@ -1,0 +1,55 @@
+{{ if and (isEndpoint .Node) (eq (or .Node.D.type "") "android") }}
+{{ info "### generic_android_preamble ###" }}
+
+{{ if .Node.D.router }}
+	{{ error "android endpoints cannot be minirouters" }}
+{{ end }}
+
+{{ $avd := or .Node.D.android_avd .Config.default_android_avd .Config.android_avd }}
+{{ if $avd }}
+	vm config android-avd {{ $avd }}
+{{ else }}
+	{{ error "missing android-avd config!" }}
+{{ end }}
+
+{{ $sdk := or .Node.D.android_sdk .Config.default_android_sdk .Config.android_sdk }}
+{{ if $sdk }}
+	vm config android-sdk {{ $sdk }}
+{{ end }}
+
+{{ $emulator := or .Node.D.android_emulator .Config.default_android_emulator .Config.android_emulator }}
+{{ if $emulator }}
+	vm config android-emulator {{ $emulator }}
+{{ end }}
+
+{{ $adb := or .Node.D.android_adb .Config.default_android_adb .Config.android_adb }}
+{{ if $adb }}
+	vm config android-adb {{ $adb }}
+{{ end }}
+
+{{ $avdDir := or .Node.D.android_avd_dir .Config.default_android_avd_dir .Config.android_avd_dir }}
+{{ if $avdDir }}
+	vm config android-avd-dir {{ $avdDir }}
+{{ end }}
+
+{{ $noWindow := or .Node.D.android_no_window .Config.default_android_no_window .Config.android_no_window }}
+{{ if $noWindow }}
+	vm config android-no-window {{ $noWindow }}
+{{ end }}
+
+{{ $consoleBasePort := or .Node.D.android_console_base_port .Config.default_android_console_base_port .Config.android_console_base_port }}
+{{ if $consoleBasePort }}
+	vm config android-console-base-port {{ $consoleBasePort }}
+{{ end }}
+
+{{ $extraArgs := or .Node.D.android_extra_args .Config.default_android_extra_args .Config.android_extra_args }}
+{{ if $extraArgs }}
+	vm config android-extra-args {{ $extraArgs }}
+{{ end }}
+
+{{ $writableSystem := or .Node.D.android_writable_system .Config.default_android_writable_system .Config.android_writable_system }}
+{{ if $writableSystem }}
+	vm config android-writable-system {{ $writableSystem }}
+{{ end }}
+
+{{ end }}

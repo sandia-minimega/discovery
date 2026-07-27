@@ -3,14 +3,14 @@
 {{ range $k, $v := .Node.D }}
 	{{ $l := len $v }}
 	{{ if lt $l 100 }}
-		vm config tag {{ $k }} {{ printf "%q" $v }}
+		vm config tags {{ $k }} {{ printf "%q" $v }}
 	{{ end }}
 {{ end }}
 {{ range $i, $v := .Node.Edges }}
 	{{ range $k, $d := $v.D }}
 		{{ $l := len $d }}
 		{{ if lt $l 100 }}
-			vm config tag edge_{{ $i }}.{{ $k }} {{ printf "%q" $d }}
+			vm config tags edge_{{ $i }}.{{ $k }} {{ printf "%q" $d }}
 		{{ end }}
 	{{ end }}
 {{ end }}
