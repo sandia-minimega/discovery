@@ -1,4 +1,4 @@
-{{ if isEndpoint .Node }}
+{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "android") }}
 {{ if .Node.D.router }}
 {{ info "### minirouter ###" }}
 {{ range $i, $e := .Node.Edges }}

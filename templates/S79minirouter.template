@@ -1,4 +1,4 @@
-{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") }}
+{{ if and (isEndpoint .Node) (ne (or .Node.D.type "") "qemu") (ne (or .Node.D.type "") "android") }}
 {{ if .Node.D.router }}
 {{ info "### minirouter ###" }}
 
